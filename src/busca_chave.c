@@ -33,9 +33,27 @@ int busca_chave(char edificio[MAX_SIZE][MAX_SIZE], int visitado[MAX_SIZE][MAX_SI
     return achou;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    
+    // Verificando se o nome do arquivo foi informado como parâmetro
+    if (argc != 2) {
+        printf("Modo de uso: ./busca_chave entrada.txt\n");
+        return 1;
+    }
+
+    //Abrindo o arquivo de entrada em modo de leitura
+    FILE *arquivo = fopen(argv[1], "r");
+
+    //Verificando se foi possível abrir o arquivo informado
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo de entrada\n");
+        return 1;
+    }
+
     int n;
-    if (scanf("%d", &n) != 1 || n <= 0 || n > MAX_SIZE) {
+
+     //Lendo tamanho do edifício
+    if (fscanf(arquivo, "%d", &n) != 1 || n <= 0 || n > MAX_SIZE) {
         printf("Erro na leitura do tamanho do edifício.\n");
         return 1;
     }
@@ -43,9 +61,10 @@ int main() {
     char edificio[MAX_SIZE][MAX_SIZE];
     int m = -1; // número de colunas
 
+    //Lendo matriz informada no arquivo
     for (int i = 0; i < n; i++) {
         int col = 0, ch;
-        while (col < MAX_SIZE && (ch = getchar()) != '\n' && ch != EOF) {
+        while (col < MAX_SIZE && (ch = getc(arquivo)) != '\n' && ch != EOF) {
             if (ch == ' ' || ch == '\r') continue; // ignora espaços e '\r'
             edificio[i][col++] = (char)ch;
         }
@@ -61,7 +80,7 @@ int main() {
     }
 
     int linha_ini, coluna_ini;
-    if (scanf("%d %d", &linha_ini, &coluna_ini) != 2 ||
+    if (fscanf(arquivo, "%d %d", &linha_ini, &coluna_ini) != 2 ||
         !dentro_limite(n, m, linha_ini, coluna_ini)) {
         printf("Erro na leitura da posição inicial.\n");
         return 1;
