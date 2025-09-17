@@ -95,5 +95,7 @@ int main(int argc, char *argv[]) {
     else
         printf("Não conseguimos encontrar a chave no Edifício João Calvino.\n");
 
+
+    fclose(arquivo);
     return 0;
 }
