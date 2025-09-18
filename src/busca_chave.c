@@ -1,25 +1,42 @@
+/*
+    Projeto e análise de algoritmos II
+    Projeto 1: A Missão no Edifício João Calvino
+
+    Carlos Eduardo Diniz de Almeida RA 10444407
+    Guilherme Silveira Giacomini    RA 10435311
+    Matheus Mendonça Lopes          RA 10443495
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define MAX_SIZE 100
 
+// função que verifica se está dentro dos limites da matriz.
 int dentro_limite(int n, int m, int linha, int coluna) {
     return linha >= 0 && linha < n && coluna >= 0 && coluna < m;
 }
 
+// algoritmo de backtracking
 int busca_chave(char edificio[MAX_SIZE][MAX_SIZE], int visitado[MAX_SIZE][MAX_SIZE],
                 int n, int m, int linha, int coluna) {
 
+    // verificado se está dentro do limite
     if (!dentro_limite(n, m, linha, coluna) || visitado[linha][coluna])
         return 0;
 
+    // verifica se é uma chave
     if (edificio[linha][coluna] == '*')
         return 1;
 
+    // marca como visitado.
     visitado[linha][coluna] = 1;
 
+
     int achou = 0;
+    
+    // verificando a letra atual e chamando a função novamente para horizontal ou vertical.
     if (edificio[linha][coluna] == 'H') {
         achou = busca_chave(edificio, visitado, n, m, linha, coluna - 1) ||
                 busca_chave(edificio, visitado, n, m, linha, coluna + 1);
@@ -28,6 +45,7 @@ int busca_chave(char edificio[MAX_SIZE][MAX_SIZE], int visitado[MAX_SIZE][MAX_SI
                 busca_chave(edificio, visitado, n, m, linha + 1, coluna);
     }
 
+    // marcado como não visitado porque não achou.
     visitado[linha][coluna] = 0;
 
     return achou;
@@ -79,6 +97,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // lendo posição de início.
     int linha_ini, coluna_ini;
     if (fscanf(arquivo, "%d %d", &linha_ini, &coluna_ini) != 2 ||
         !dentro_limite(n, m, linha_ini, coluna_ini)) {
@@ -86,8 +105,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // matriz para verificar se uma posição foi visitada.
     int visitado[MAX_SIZE][MAX_SIZE] = {0};
 
+    // resposta da busca da chave
     int resultado = busca_chave(edificio, visitado, n, m, linha_ini, coluna_ini);
 
     if (resultado)
