@@ -1,0 +1,52 @@
+##### PROJETO 1 - PROJETO E ANÁLISE DE ALGORITMOS II #####
+UNIVERSIDADE PRESBITERIANA MACKENZIE
+PROF. CHARLES BOULHOSA RODAMILANS
+
+INTEGRANTES:
+Carlos Eduardo Diniz de Almeida RA 10444407
+Guilherme Silveira Giacomini    RA 10435311
+Matheus Mendonça Lopes          RA 10443495
+
+##### EXECUÇÃO DO PROGRAMA #####
+A fim de executar o programa, os seguintes passos devem ser seguidos:
+
+1. O arquivo .c deve ser compilado da seguinte maneira:
+gcc -o main.exe *.c (não foi necessário o uso de .h)
+
+2. Após a compilação, a entrada do programa será feita através de um .txt, que pode ter qualquer nome. Dentro desse txt, haverá uma única entrada, que deve estar no formato escopado nas orientações do projeto:
+EX1:
+5
+HVVVHV
+HHVVVV
+HVHVVH
+*HVVHV
+HHHVHH
+0 4
+
+EX2: 
+7
+HVVVHHHVV
+HVVVHVVHV
+HHHVVHHHV
+VVHVVHVVV
+HHHVVHVH*
+HHVHHHHHH
+VVVVVVVVV
+0 4
+
+EX3:
+5
+HVVVHV
+HHVVVV
+HVHVVH
+*HVVHV
+HHHVHH
+0 0
+
+3. Com o arquivo de entrada criado, agora é necessário apenas executar o programa, através do seguinte comando:
+./main.exe (nome_do_arquivo_de_entrada).txt
+
+4. Após executar, será retornado no console a saída do programa, ou seja, as possíveis frases:
+"Não conseguimos encontrar a chave no Edifício João Calvino."
+ou
+"Chave encontrada no Edifício João Calvino!"
